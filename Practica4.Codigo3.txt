@@ -1,0 +1,54 @@
+//Practica 4. Memoria dinamica
+#include <stdio.h>
+#include <stdlib.h>
+int main (){
+    //inicializo mis variables
+    int *arreglo, *arreglo2, num, cont;
+    //Pregunto cuantos elemento tendra mi primer conjunto
+    printf("¿Cuántos elementos tiene el conjunto?\n");
+    scanf("%d",&num);
+    arreglo = (int *)malloc (num * sizeof(int));
+    if (arreglo!=NULL) {
+        //Aqui ya puede el usario ingresar datos en el conjunto, no se
+        //agregarian datos basura
+        for (cont=0 ; cont < num ; cont++){
+            printf("Inserte el elemento %d del conjunto.\n",cont+1);
+            scanf("%d",(arreglo+cont));
+        }
+        //Me imprime el primer arreglo, con los datos agregados anteriormente
+        printf("Vector insertado:\n\t[");
+        for (cont=0 ; cont < num ; cont++){
+            printf("\t%d",*(arreglo+cont));
+        }
+        printf("\t]\n");
+        //Aqui se usara el segundo arreglo y aumentara el vector en tiempo de ejecucion
+        printf("Aumentando el tamaño del conjunto al doble.\n");
+        num *= 2;
+        //Como voy a aumentar al doble, la variable antes dada por el usario donde
+        //me indicaba de que tamaño quería mi vector, ahora la multiplico por 2 para
+        //que sea el doble
+        arreglo2 = (int *)realloc (arreglo,num*sizeof(int));
+        //uso la funcion realloc que me ayuda a redimensionar mi vector en tiempo de ejecucion
+        //está solo se debe usar luego del malloc o el calloc, porque necesita tener datos de memoria
+        //anteriores para poder redimensionar
+        if (arreglo2 != NULL) {
+            arreglo = arreglo2;
+            for (; cont < num ; cont++){
+                //comienza el usario a agregar los datos faltantes
+                printf("Inserte el elemento %d del conjunto.\n",cont+1);
+                scanf("%d",(arreglo2+cont));
+            }
+            //imprime el vector final
+            printf("Vector insertado:\n\t[");
+            for (cont=0 ; cont < num ; cont++){
+                printf("\t%d",*(arreglo2+cont));
+            }
+            printf("\t]\n");
+        }
+        free (arreglo);
+    }
+    return 0;
+}
+
+
+

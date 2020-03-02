@@ -1,0 +1,29 @@
+//Practica 4. Memoria dinamica
+ 
+#include <stdio.h>
+#include <stdlib.h>
+ 
+int main()
+{
+    //Un apuntador para poder acceder al dato almacenado
+    int *arreglo, num, cont;
+    printf("Cuantos elementos tiene el conjunto? \n");
+    scanf("%d", &num);
+    //Uso memoria dinamica en mi arreglo, voy guardando los datos en tiempo de ejecucion
+    //malloc funciona para reservar un bloque de memoria
+    arreglo = (int *)malloc (num * sizeof(int));
+    if(arreglo!=NULL)
+    {
+        printf("Vector reservado: \n\t [");
+        for (cont=0; cont<num ; cont++)
+        {
+            printf("\t %d", *(arreglo+cont));
+        }
+        printf("\t]\n");
+        printf("Se libera el espacio reservado \n");
+        free(arreglo);
+    }
+    return 0;
+}
+
+

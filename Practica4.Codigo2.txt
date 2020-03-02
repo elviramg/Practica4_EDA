@@ -1,0 +1,30 @@
+//Practica 4. Memoria dinamica
+ 
+#include <stdio.h>
+#include <stdlib.h>
+ 
+int main (){
+    //Se inicializa las variables, dos enteros y un apuntador
+    int *arreglo, num, cont;
+    // Se imprime un comentario en pantalla
+    printf("¿Cuantos elementos tiene el conjunto?\n");
+    // Se guarda un dato de tipo entero
+    scanf("%d",&num);
+    //Se usa la funcion calloc
+    /* La diferencia entre malloc y calloc, es que calloc inicializa la memoria reservada en cero
+     */
+    arreglo = (int *)calloc (num, sizeof(int));
+    if (arreglo!=NULL) {
+        printf("Vector reservado:\n\t[");
+        for (cont=0 ; cont<num ; cont++){
+            printf("\t%d",*(arreglo+cont));
+        }
+        printf("\t]\n");
+        printf("Se libera el espacio reservado.\n");
+        free(arreglo);
+    }
+    return 0;
+}
+
+
+
